@@ -101,7 +101,7 @@ class Dunecore(CMakePackage):
     depends_on("sqlite")
     depends_on("nlohmann-json")
     depends_on("highfive")
-    depends_on("hdf5")
+    depends_on("hdf5@1.12.2")
     depends_on("cetmodules", type="build")
     depends_on("cmake", type="build")
 
