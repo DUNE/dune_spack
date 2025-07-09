@@ -56,6 +56,8 @@ class Duneana(CMakePackage):
     patch('v09_81_00d00.patch', when='@09_81_00d00')
 
     # FIXME: Add dependencies if required.
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("duneanaobj")
     depends_on("duneopdet")
     depends_on("dunereco")

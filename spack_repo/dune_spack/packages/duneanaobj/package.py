@@ -57,6 +57,8 @@ class Duneanaobj(CMakePackage):
     patch('v03_06_01.patch', when="@03_06_01")
     patch('v09_81_00d00.patch', when="@03_03_00")
     # FIXME: Add dependencies if required.
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("root")
     depends_on("canvas-root-io")
     depends_on("py-srproxy@00.43:", when="@03_03_00")

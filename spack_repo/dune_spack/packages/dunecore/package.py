@@ -55,6 +55,8 @@ class Dunecore(CMakePackage):
 
     patch('v09_81_00d00.patch', when='@09_81_00d00')
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("boost")
     depends_on("geant4")
     depends_on("root")

@@ -56,6 +56,8 @@ class Duneutil(CMakePackage):
     patch('v09_81_00d00.patch', when='@9_81_00d00')
 
     # FIXME: Add dependencies if required.
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("art-root-io")
     depends_on("cetmodules", type="build")
     depends_on("cmake", type="build")
