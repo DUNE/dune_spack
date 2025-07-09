@@ -29,7 +29,7 @@ class Protoduneana(CMakePackage):
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://www.example.com"
-    url = "https://github.com/DUNE/protoduneana/archive/refs/tags/v09_89_01d01.tar.gz"
+    url = "https://github.com/DUNE/protoduneana/archive/refs/tags/v10_08_02d00.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -39,6 +39,7 @@ class Protoduneana(CMakePackage):
     # See https://spdx.org/licenses/ for a list.
     license("UNKNOWN")
 
+    version("10_08_02d00", sha256="d06274906c50c37bf9fa4f38ecdfa5ce40e44b2df5f925112b78c0a5c8d836e3")
     version("10_00_03d00", sha256="e94a603f2469e9c46d140882c6b44d902eb2d8f7d81db0f1ffcaf50d052263da")
     version("09_92_00d00", sha256="27d7a23868279c61c4f63407e89fadec342eb19c4a8d55882cf8dc875d858055")
     version("09_89_01d01", sha256="50df6c272d564a6c8d158f229d500a25fff9fa262821a47876083bd3059df213")

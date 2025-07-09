@@ -30,7 +30,7 @@ class Duneopdet(CMakePackage):
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://www.example.com"
-    url = "https://github.com/DUNE/duneopdet/archive/refs/tags/v09_89_01d01.tar.gz"
+    url = "https://github.com/DUNE/duneopdet/archive/refs/tags/v10_08_02d00.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -40,6 +40,7 @@ class Duneopdet(CMakePackage):
     # See https://spdx.org/licenses/ for a list.
     license("UNKNOWN")
 
+    version("10_08_02d00", sha256="c6913cb4f58faea4c279300ea41f51bf51e2c822c2fbd2b5daad70dd97648109")
     version("10_00_03d00", sha256="b3b62f15d20a2db3389e1cdd4480280316f87ee915a81fd4f0d050fc9e202868")
     version("09_89_01d01", sha256="d39bf58d4dedf985f51d8b2d272354047603fc520145b282d17c85cd7877fdbe")
     version("09_81_00d00", sha256="ea4e39071507f9f1697ba2251481d2ff9396238a33ee38c0fe68070c2c1a9750")

@@ -29,7 +29,7 @@ class Dunereco(CMakePackage):
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://www.example.com"
-    url = "https://github.com/DUNE/dunereco/archive/refs/tags/v09_89_01d01.tar.gz"
+    url = "https://github.com/DUNE/dunereco/archive/refs/tags/v10_08_02d00.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -39,6 +39,7 @@ class Dunereco(CMakePackage):
     # See https://spdx.org/licenses/ for a list.
     license("UNKNOWN")
 
+    version("10_08_02d00", sha256="1e2c283ceb0a59c6f907be327255b5fc5234a233e0a998d1b90e42fb4ec6e793")
     version("10_00_03d00", sha256="1c14a337a18b610accc24e5fb7816b029b7bde5e02f95e0684677e02847e3c5c")
     version("09_92_00d00", sha256="6bc62ced928ca36a5c9502bf7f9e6c341caeeaebf85614463a8c4fd676083248")
     version("09_89_01d01", sha256="f9e352729f3c30496252de67f7f1e2b579dbcfd27076e31ee7d62a29d9260dd3")

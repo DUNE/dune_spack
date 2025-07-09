@@ -29,7 +29,7 @@ class Dunecore(CMakePackage):
 
     # FIXME: Add a proper url for your package's homepage here.
     homepage = "https://www.example.com"
-    url = "https://github.com/DUNE/dunecore/archive/refs/tags/v09_89_01d01.tar.gz"
+    url = "https://github.com/DUNE/dunecore/archive/refs/tags/v10_08_02d00.tar.gz"
 
     # FIXME: Add a list of GitHub accounts to
     # notify when the package is updated.
@@ -39,6 +39,7 @@ class Dunecore(CMakePackage):
     # See https://spdx.org/licenses/ for a list.
     license("UNKNOWN")
 
+    version("10_08_02d00", sha256="e2f0667237b7982461fb6770805ee265dce76ba53e97ada93c33046dfb4a557c")
     version("10_00_03d00", sha256="853476dfd8e1c97e34e03d0bf47a393a4de2e61af3b7623a41a7004c24851647")
     version("09_92_00d00", sha256="37edf3afd3be02cbd64adef1ab1c5c9c7e275d7ffcee44ffce2172451f94dbcd")
     version("09_89_01d01", sha256="cf61a68d0810103bd45a1133a969378817caf2e09be87ebcaea718ac4bd09060")
