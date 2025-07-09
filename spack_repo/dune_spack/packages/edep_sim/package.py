@@ -42,8 +42,3 @@ class EdepSim(CMakePackage):
         env.set("EDEPSIM_LIB", self.prefix.lib)
         env.set("EDEPSIM_INC", self.prefix.include)
 
-
-class CMakeBuilder(spack.build_systems.cmake.CMakeBuilder):
-    def cmake_args(self):
-        args = []  
-        return args
