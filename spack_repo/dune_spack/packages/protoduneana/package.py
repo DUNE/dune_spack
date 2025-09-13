@@ -82,13 +82,12 @@ class Protoduneana(CMakePackage, FnalGithubPackage):
             self.define("CMAKE_MODULE_PATH", "%s/Modules;%s/Modules" %
                        (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
         ] 
-        with when("+tensorflow"):
-            tdir = "{0}/lib/python{1}/site-packages/tensorflow".format(
-                    self.spec["py-tensorflow"].prefix, self.spec["python"].version.up_to(2)
-                    )
-            args.append("-DTensorFlow_ROOT:FILEPATH={0}".format(tdir))
-            args.append("-DTensorFlow_cc_LIBRARY:FILEPATH={0}/libtensorflow_cc.so.2".format(tdir))
-            args.append("-DTensorFlow_framework_LIBRARY:FILEPATH={0}/libtensorflow_framework.so.2".format(tdir))
+        tdir = "{0}/lib/python{1}/site-packages/tensorflow".format(
+                self.spec["py-tensorflow"].prefix, self.spec["python"].version.up_to(2)
+                )
+        args.append("-DTensorFlow_ROOT:FILEPATH={0}".format(tdir))
+        args.append("-DTensorFlow_cc_LIBRARY:FILEPATH={0}/libtensorflow_cc.so.2".format(tdir))
+        args.append("-DTensorFlow_framework_LIBRARY:FILEPATH={0}/libtensorflow_framework.so.2".format(tdir))
 
         return args
 

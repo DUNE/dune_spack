@@ -57,6 +57,7 @@ class Duneopdet(CMakePackage, FnalGithubPackage):
     depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("dunecore")
+    depends_on("larfinder")
     depends_on("duneprototypes")
     depends_on("nlohmann-json")
     depends_on("cetmodules", type="build")
