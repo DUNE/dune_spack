@@ -59,10 +59,6 @@ class Dunereco(CMakePackage):
     depends_on("cmake", type="build")
 
     def patch(self):
-        filter_file("find_package\( Eigen3 REQUIRED \)",
-                'list(APPEND CMAKE_FIND_LIBRARY_SUFFIXES ".so.2")\nfind_package(TensorFlow REQUIRED EXPORT)\nfind_package( Eigen3 REQUIRED )',
-                "CMakeLists.txt"
-                )
         filter_file('#include "tensorflow/cc/saved_model/tag_constants.h"',
                     '#include "tensorflow/cc/saved_model/bundle_v2.h"\n#include "tensorflow/cc/saved_model/constants.h"\n#include "tensorflow/cc/saved_model/loader.h"',
                     "dunereco/CVN/tf/tf_bundle.cc",
@@ -85,8 +81,14 @@ class Dunereco(CMakePackage):
 
     def setup_build_environment(self, spack_env):
         spack_env.set("TRITON_DIR", self.spec["triton"].prefix.lib)
-        spack_env.set("TENSORFLOW_DIR", join_path(
+        spack_env.set("TENSORFLOW_DIR",
+                join_path(
                     self.spec["py-tensorflow"].prefix.lib,
+                    "python%s/site-packages/tensorflow"
+                    % self.spec["python"].version.up_to(2),
+                ) + ";" +
+                join_path(
+                    self.spec["py-tensorflow"].prefix.lib64,
                     "python%s/site-packages/tensorflow"
                     % self.spec["python"].version.up_to(2),
                 )
@@ -102,6 +104,11 @@ class Dunereco(CMakePackage):
             "TENSORFLOW_INC",
                 join_path(
                     self.spec["py-tensorflow"].prefix.lib,
+                    "python%s/site-packages/tensorflow/include"
+                    % self.spec["python"].version.up_to(2),
+                ) + ";" +
+                join_path(
+                    self.spec["py-tensorflow"].prefix.lib64,
                     "python%s/site-packages/tensorflow/include"
                     % self.spec["python"].version.up_to(2),
                 )

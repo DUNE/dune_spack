@@ -96,7 +96,12 @@ class Duneana(CMakePackage):
                     self.spec["py-tensorflow"].prefix.lib,
                     "python%s/site-packages/tensorflow"
                     % self.spec["python"].version.up_to(2),
-                )
+                ) + ";" +
+                join_path(
+                    self.spec["py-tensorflow"].prefix.lib,
+                    "python%s/site-packages/tensorflow"
+                    % self.spec["python"].version.up_to(2),
+                ) 
         )
         spack_env.set(
             "TENSORFLOW_INC",
@@ -104,7 +109,13 @@ class Duneana(CMakePackage):
                     self.spec["py-tensorflow"].prefix.lib,
                     "python%s/site-packages/tensorflow/include"
                     % self.spec["python"].version.up_to(2),
-                )
+                ) + ";" +
+                join_path(
+                    self.spec["py-tensorflow"].prefix.lib,
+                    "python%s/site-packages/tensorflow/include"
+                    % self.spec["python"].version.up_to(2),
+                ) 
+
         )
 
     def setup_run_environment(self, run_env):
