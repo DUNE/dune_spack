@@ -74,31 +74,35 @@ class Duneopdet(CMakePackage):
         return args
 
     def setup_build_environment(self, spack_env):
-        spack_env.set("TENSORFLOW_DIR",
+        if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
+            spack_env.set("TENSORFLOW_DIR",
+                join_path(
+                    self.spec["py-tensorflow"].prefix.lib64,
+                    "python%s/site-packages/tensorflow"
+                    % self.spec["python"].version.up_to(2),
+                )
+            spack_env.set("TENSORFLOW_INC",
+                join_path(
+                    self.spec["py-tensorflow"].prefix.lib64,
+                    "python%s/site-packages/tensorflow/include"
+                    % self.spec["python"].version.up_to(2),
+                )
+            )
+        else
+            spack_env.set("TENSORFLOW_DIR",
                 join_path(
                     self.spec["py-tensorflow"].prefix.lib,
                     "python%s/site-packages/tensorflow"
                     % self.spec["python"].version.up_to(2),
-                ) + ";" +
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib,
-                    "python%s/site-packages/tensorflow"
-                    % self.spec["python"].version.up_to(2),
-                )
-        )
-        spack_env.set(
-            "TENSORFLOW_INC",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib,
-                    "python%s/site-packages/tensorflow/include"
-                    % self.spec["python"].version.up_to(2),
-                ) + ";" +
+                ) 
+            )
+            spack_env.set( "TENSORFLOW_INC",
                 join_path(
                     self.spec["py-tensorflow"].prefix.lib,
                     "python%s/site-packages/tensorflow/include"
                     % self.spec["python"].version.up_to(2),
                 )
-        )
+            )
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
