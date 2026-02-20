@@ -118,8 +118,8 @@ class Dunereco(CMakePackage):
                     self.spec["py-tensorflow"].prefix.lib,
                     "python%s/site-packages/tensorflow"
                     % self.spec["python"].version.up_to(2),
+                    )
                 )
-
             spack_env.set(
                 "TENSORFLOW_INC",
                     join_path(
