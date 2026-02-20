@@ -99,7 +99,7 @@ class Duneana(CMakePackage):
                     % self.spec["python"].version.up_to(2),
                 )
             )
-        spack_env.set(
+            spack_env.set(
             "TENSORFLOW_INC",
                 join_path(
                     self.spec["py-tensorflow"].prefix.lib64,
@@ -107,7 +107,7 @@ class Duneana(CMakePackage):
                     % self.spec["python"].version.up_to(2),
                 )
             )
-        else
+        else:
             spack_env.set("TENSORFLOW_DIR",
                 join_path(
                     self.spec["py-tensorflow"].prefix.lib,

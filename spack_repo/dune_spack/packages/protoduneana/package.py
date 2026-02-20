@@ -99,7 +99,7 @@ class Protoduneana(CMakePackage):
                     % self.spec["python"].version.up_to(2),
                 )
             )
-        else    
+        else: 
             spack_env.set("LIBTORCH_DIR", join_path(
                     self.spec["py-torch"].prefix.lib,
                     "python%s/site-packages/torch"
@@ -122,7 +122,7 @@ class Protoduneana(CMakePackage):
                     % self.spec["python"].version.up_to(2),
                 )
             )
-        else
+        else:
             spack_env.set("TENSORFLOW_DIR",
                 join_path(
                     self.spec["py-tensorflow"].prefix.lib,
