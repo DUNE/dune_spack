@@ -67,6 +67,10 @@ class Dunereco(CMakePackage):
                     "{},",
                     "dunereco/CVN/tf/tf_bundle.cc",
                     )
+        filter_file('find_package\( Eigen3 REQUIRED \)',
+                'find_package(protobuf REQUIRED)\nfind_package( Eigen3 REQUIRED )',
+                "CMakeLists.txt"
+                )
         filter_file('find_ups_product\( dunepdlegacy \)',
                 'find_package(dunepdlegacy REQUIRED)\nfind_package(artdaq_core REQUIRED)',
                 "CMakeLists.txt"
@@ -95,7 +99,10 @@ class Dunereco(CMakePackage):
                     % self.spec["python"].version.up_to(2),
                 )
             )
-        spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib)
+        if os.path.exists(self.spec["protobuf"].prefix.lib64):
+            spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib64)
+        else
+            spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib)
         if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
             spack_env.set("TENSORFLOW_DIR",
                 join_path(
