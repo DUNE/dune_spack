@@ -101,7 +101,7 @@ class Dunereco(CMakePackage):
             )
         if os.path.exists(self.spec["protobuf"].prefix.lib64):
             spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib64)
-        else
+        else:
             spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib)
         if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
             spack_env.set("TENSORFLOW_DIR",
