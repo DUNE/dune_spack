@@ -40,6 +40,11 @@ class Dunereco(CMakePackage):
         multi=False,
         description="Use the specified C++ standard when building.",
     )
+    variant(
+        'tensorflow',
+        default=False,
+        description='Turn On/Off Tensorflow components'
+    )
 
     patch('v09_81_00d00.patch', when='@09.81.00d00')
 
@@ -47,7 +52,7 @@ class Dunereco(CMakePackage):
     depends_on("cxx", type="build")
     depends_on("hep-hpc")
     #depends_on("python")
-    depends_on("py-tensorflow")
+    depends_on("py-tensorflow", when='+tensorflow')
     depends_on("py-torch")
     depends_on("triton")
     depends_on("protobuf")
@@ -76,6 +81,12 @@ class Dunereco(CMakePackage):
                 'find_package(dunepdlegacy REQUIRED)\nfind_package(artdaq_core REQUIRED)',
                 "CMakeLists.txt"
                 )
+
+        filter_file(
+            r'.*DEFINED.*',
+            'if ( (DEFINED ENV{TENSORFLOW_DIR}) AND (DEFINED ENV{LIBTORCH_DIR}) )',
+            'dunereco/TransformerCVN/CMakeLists.txt'
+        )
     def cmake_args(self):
         args = [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
@@ -84,6 +95,7 @@ class Dunereco(CMakePackage):
         ] 
         return args
 
+    @when('+tensorflow')
     def setup_build_environment(self, spack_env):
         spack_env.set("TRITON_DIR", self.spec["triton"].prefix.lib)
         if os.path.exists(self.spec["py-torch"].prefix.lib64):
@@ -104,6 +116,7 @@ class Dunereco(CMakePackage):
             spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib64)
         else:
             spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib)
+        
         if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
             spack_env.set("TENSORFLOW_DIR",
                 join_path(
@@ -136,7 +149,28 @@ class Dunereco(CMakePackage):
                         % self.spec["python"].version.up_to(2),
                     )
                 )
-
+    @when('~tensorflow')
+    def setup_build_environment(self, spack_env):
+        spack_env.set("TRITON_DIR", self.spec["triton"].prefix.lib)
+        if os.path.exists(self.spec["py-torch"].prefix.lib64):
+            spack_env.set("LIBTORCH_DIR", join_path(
+                    self.spec["py-torch"].prefix.lib64,
+                    "python%s/site-packages/torch"
+                    % self.spec["python"].version.up_to(2),
+                )
+            )
+        else:
+            spack_env.set("LIBTORCH_DIR", join_path(
+                    self.spec["py-torch"].prefix.lib,
+                    "python%s/site-packages/torch"
+                    % self.spec["python"].version.up_to(2),
+                )
+            )
+        if os.path.exists(self.spec["protobuf"].prefix.lib64):
+            spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib64)
+        else:
+            spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib)
+        
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
         run_env.prepend_path("PATH", self.prefix.bin)

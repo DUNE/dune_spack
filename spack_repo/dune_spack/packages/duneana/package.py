@@ -40,12 +40,17 @@ class Duneana(CMakePackage):
         multi=False,
         description="Use the specified C++ standard when building.",
     )
+    variant(
+        "cafmaker",
+        default=False,
+        description="Turn on/off making cafmaker",
+    )
 
     patch('v09_81_00d00.patch', when='@09.81.00d00')
     patch('v09_92_00d00.patch', when='@09.92.00d00')
 
+    @when("+cafmaker")
     def patch(self):
-
         filter_file(
                 r'find_package\( duneanaobj REQUIRED EXPORT \)',
                 '',
@@ -67,20 +72,39 @@ class Duneana(CMakePackage):
                 "dunereco::CVN_func dunereco::RegCNNFunc duneanaobj_StandardRecord duneanaobj_StandardRecordFlat",
                 "duneana/CAFMaker/CMakeLists.txt"
                 )
+    @when("~cafmaker")
+    def patch(self):
+        filter_file(
+                r'find_package\( duneanaobj REQUIRED EXPORT \)',
+                '',
+                'CMakeLists.txt',
+            )
+        for f in ('WireAna','AnaTree','CAFMaker'):
+            filter_file(
+                     r'duneanaobj::[a-zA-Z0-9]*',
+                     '',
+                     f'duneana/{f}/CMakeLists.txt',
+                 )
+        filter_file(
+            r'.*CAFMaker.*',
+            '',
+            'duneana/CMakeLists.txt'
+        )
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")
-    depends_on("duneanaobj")
+    depends_on("duneanaobj", when='+cafmaker')
     depends_on("dunereco")
     depends_on("nufinder")
     depends_on("larfinder")
-    depends_on("py-tensorflow")
+    depends_on("py-tensorflow", when='+cafmaker')
     #depends_on("python")
     depends_on("systematicstools")
     depends_on("cetmodules", type="build")
     depends_on("cmake", type="build")
     depends_on("duneopdet")
 
+    @when('+cafmaker')
     def cmake_args(self):
         args = [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
@@ -90,6 +114,21 @@ class Duneana(CMakePackage):
         ] 
         return args
 
+    @when('~cafmaker')
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+            self.define("CMAKE_MODULE_PATH", "%s/Modules;%s/Modules" %
+                       (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
+        ] 
+        return args
+
+    # with when('~cafmaker'):
+    #     print('no cafmaker')
+    # with when('+cafmaker'):
+    #     print('yes cafmaker')
+
+    @when('+cafmaker')
     def setup_build_environment(self, spack_env):
         if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
             spack_env.set("TENSORFLOW_DIR",
