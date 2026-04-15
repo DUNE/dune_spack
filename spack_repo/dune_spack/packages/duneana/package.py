@@ -52,6 +52,11 @@ class Duneana(CMakePackage):
     @when("+cafmaker")
     def patch(self):
         filter_file(
+            r'.*X3d.*',
+            '',
+            'duneana/CalibAna/CMakeLists.txt'
+        )
+        filter_file(
                 r'find_package\( duneanaobj REQUIRED EXPORT \)',
                 '',
                 'CMakeLists.txt',
@@ -75,6 +80,11 @@ class Duneana(CMakePackage):
     @when("~cafmaker")
     def patch(self):
         filter_file(
+            r'.*X3d.*',
+            '',
+            'duneana/CalibAna/CMakeLists.txt'
+        )
+        filter_file(
                 r'find_package\( duneanaobj REQUIRED EXPORT \)',
                 '',
                 'CMakeLists.txt',
@@ -96,7 +106,7 @@ class Duneana(CMakePackage):
     depends_on("duneanaobj", when='+cafmaker')
     depends_on("dunereco")
     depends_on("nufinder")
-    depends_on("larfinder")
+    #depends_on("larfinder")
     depends_on("py-tensorflow", when='+cafmaker')
     #depends_on("python")
     depends_on("systematicstools")
@@ -122,11 +132,6 @@ class Duneana(CMakePackage):
                        (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
         ] 
         return args
-
-    # with when('~cafmaker'):
-    #     print('no cafmaker')
-    # with when('+cafmaker'):
-    #     print('yes cafmaker')
 
     @when('+cafmaker')
     def setup_build_environment(self, spack_env):
