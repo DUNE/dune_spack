@@ -65,7 +65,6 @@ class Dunesw(CMakePackage):
     depends_on("cmake", type="build")
     depends_on("justin", type="run")
     depends_on("larg4", type=("test","run"))
-    depends_on("dune-pardata", type=("test","run"))
 
     def cmake_args(self):
         args = [
