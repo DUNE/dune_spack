@@ -154,6 +154,7 @@ class Dunereco(CMakePackage):
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         run_env.append_path("FHICL_FILE_PATH", self.prefix.fcl)
         run_env.append_path("FW_SEARCH_PATH", self.prefix.gdml)
+        run_env.prepend_path("WIRECELL_PATH", self.prefix.join("wire-cell-cfg"))
 
     def setup_dependent_run_environment(self, run_env, dspec):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
@@ -161,3 +162,4 @@ class Dunereco(CMakePackage):
         run_env.prepend_path("ROOT_INCLUDE_PATH", self.prefix.include)
         run_env.append_path("FHICL_FILE_PATH", self.prefix.fcl)
         run_env.append_path("FW_SEARCH_PATH", self.prefix.gdml)
+        run_env.prepend_path("WIRECELL_PATH", self.prefix.join("wire-cell-cfg"))
