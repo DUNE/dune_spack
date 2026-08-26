@@ -67,7 +67,7 @@ class Protoduneana(CMakePackage):
     depends_on("hep-hpc")
     depends_on("duneopdet")
     depends_on("duneprototypes")
-    depends_on("dunereco", when="@10.12:")
+    depends_on("dunereco")
     depends_on("dunesim")
     depends_on("python")
     depends_on("py-tensorflow")
