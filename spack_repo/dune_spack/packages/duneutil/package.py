@@ -13,6 +13,7 @@ class Duneutil(CMakePackage):
     git = "https://github.com/DUNE/duneutil"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.23.00d01", sha256="0551388058e3bd243603d3e858192ebad3572b0c6bebb7d3306329dde956bbb3")
     version("10.23.00d00", sha256="b977c10081c29c6244a082801ff77962aa2dc62c3dd426b2dbd7bc36bec526ea")
     version("10.22.00d01", sha256="c523b3ca1ced33dfa1989c4a385e9779d2b5db4047b7fe61eb4aaa3582ac143a")
     version("10.22.00d00", sha256="ebae03afa48f2b24afa4f804cfe2d33e03fa4e7f19623c8185b0e85c0f174a56")

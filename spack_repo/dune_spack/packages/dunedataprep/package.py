@@ -13,6 +13,7 @@ class Dunedataprep(CMakePackage):
     git = "https://github.com/DUNE/dunedataprep"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.23.00d01", sha256="45600fa34fc6c729673abc5a011dd21d3bcc46c478b6ed61d6b1ff3f0a59ac4e")
     version("10.23.00d00", sha256="9d7e46f335c2768c59e4841d30abb1fddaeacda7d99519c85f22478b2c2c06e9")
     version("10.22.00d01", sha256="a84408d41574a903abafea96b8fd3739eb8938cadd6f637950b9a00574830ecd")
     version("10.22.00d00", sha256="bf2460ba5f9ab48595d4ae007895a524cc0b735f6916f8fde2d7ca7ea80f0c60")
