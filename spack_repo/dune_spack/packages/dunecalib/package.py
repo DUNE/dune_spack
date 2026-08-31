@@ -13,6 +13,7 @@ class Dunecalib(CMakePackage):
     git = "https://github.com/DUNE/dunecalib"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.23.00d01", sha256="8f16b85a532a45eac5c7a32cd051b37633917cd48ceb73b0e83d7834d13ce19b")
     version("10.23.00d00", sha256="00556cc5818a8fa901dde0a8c4efaa233d10503ba1b247326e916f566f3e1c31")
     version("10.22.00d01", sha256="1a41d9d2635b4b68908ea91c6c11aff51ca169d313080b88fa43f75751c8bf24")
     version("10.22.00d00", sha256="64c960ba3e73b1916dac0499f3fb3aff9627e5e7e224466b6d5df740e3355a47")
