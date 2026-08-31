@@ -13,6 +13,7 @@ class Duneana(CMakePackage):
     git = "https://github.com/DUNE/duneana"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.23.00d00", sha256="4a6af5267602a1b3d38e1cdc95dfa51b0cf1a23566971c2e753a36062190076d")
     version("10.22.00d01", sha256="8f41a5f11df81f0e08ce5f29b4a701dbaeaada46a0701bb45bc2ff62f82b6470")
     version("10.22.00d00", sha256="1c5bfc5fd378a8e1616f59289cc1e8c6a44be0bd6e50935c008804bfdf02a502")
     version("10.21.02d00", sha256="12220ab5714396a7fd8b1d5942d9aca772a7ab7b6b10b8891a046ccaff160b8a")
