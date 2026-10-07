@@ -64,7 +64,7 @@ class Dunesw(CMakePackage):
     depends_on("duneexamples")
     depends_on("protoduneana")
     depends_on("nurandom")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
     depends_on("justin", type="run")
     depends_on("larg4", type=("test","run"))

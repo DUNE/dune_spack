@@ -84,7 +84,7 @@ class Duneana(CMakePackage):
     depends_on("py-tensorflow")
     #depends_on("python")
     depends_on("systematicstools")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
     depends_on("duneopdet")
 

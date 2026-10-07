@@ -76,7 +76,7 @@ class Protoduneana(CMakePackage):
     depends_on("systematicstools")
     depends_on("larfinder", type="build")
     depends_on("nufinder", type="build")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
 
     def cmake_args(self):
