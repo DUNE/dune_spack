@@ -48,7 +48,7 @@ class Dunepdlegacy(CMakePackage):
     depends_on("cetlib")
     depends_on("nufinder")
     depends_on("messagefacility")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
 
     def cmake_args(self):

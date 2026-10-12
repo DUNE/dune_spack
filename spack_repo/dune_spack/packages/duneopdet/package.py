@@ -73,7 +73,7 @@ class Duneopdet(CMakePackage):
     depends_on("protobuf")
     depends_on("grpc")
     depends_on("larsimdnn")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
 
     def cmake_args(self):

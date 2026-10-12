@@ -53,7 +53,7 @@ class Dunecalib(CMakePackage):
     depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("dunecore")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
 
     def cmake_args(self):

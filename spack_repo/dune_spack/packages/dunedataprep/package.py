@@ -72,7 +72,7 @@ class Dunedataprep(CMakePackage):
     depends_on("larwirecell")
     depends_on("wire-cell-toolkit")
     depends_on("larwirecell")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
     depends_on("root+spectrum")
     
