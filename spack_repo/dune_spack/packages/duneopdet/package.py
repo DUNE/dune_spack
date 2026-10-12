@@ -50,6 +50,12 @@ class Duneopdet(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
+    variant(
+        "tensorflow",
+        default=True,
+        description="Include py-tensorflow",
+    )
+
     patch('v10_11_01d00.patch', when='@10.11.01d00',
           sha256='6c9554c58ac7bbff14475dcfa756bd1369ffd8298d85d03fa0e1b27e71cb9252')
     patch('v10_00_03d00.patch', when='@10.00.03d00')
@@ -69,10 +75,11 @@ class Duneopdet(CMakePackage):
     depends_on("duneprototypes")
     depends_on("nlohmann-json")
     depends_on("larfinder")
-    depends_on("py-tensorflow")
+    depends_on("py-tensorflow", when="+tensorflow")
     depends_on("protobuf")
     depends_on("grpc")
-    depends_on("larsimdnn")
+    depends_on("larsimdnn+tensorflow", when="+tensorflow")
+    depends_on("larsimdnn~tensorflow", when="~tensorflow")
     depends_on("cetmodules@3", type="build")
     depends_on("cmake", type="build")
 
@@ -83,36 +90,37 @@ class Duneopdet(CMakePackage):
         return args
 
     def setup_build_environment(self, spack_env):
-        if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
-            spack_env.set("TENSORFLOW_DIR",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib64,
-                    "python%s/site-packages/tensorflow"
-                    % self.spec["python"].version.up_to(2),
+        with when("+tensorflow"):
+            if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
+                spack_env.set("TENSORFLOW_DIR",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib64,
+                        "python%s/site-packages/tensorflow"
+                        % self.spec["python"].version.up_to(2),
+                    )
                 )
-            )
-            spack_env.set("TENSORFLOW_INC",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib64,
-                    "python%s/site-packages/tensorflow/include"
-                    % self.spec["python"].version.up_to(2),
+                spack_env.set("TENSORFLOW_INC",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib64,
+                        "python%s/site-packages/tensorflow/include"
+                        % self.spec["python"].version.up_to(2),
+                    )
                 )
-            )
-        else:
-            spack_env.set("TENSORFLOW_DIR",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib,
-                    "python%s/site-packages/tensorflow"
-                    % self.spec["python"].version.up_to(2),
-                ) 
-            )
-            spack_env.set( "TENSORFLOW_INC",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib,
-                    "python%s/site-packages/tensorflow/include"
-                    % self.spec["python"].version.up_to(2),
+            else:
+                spack_env.set("TENSORFLOW_DIR",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib,
+                        "python%s/site-packages/tensorflow"
+                        % self.spec["python"].version.up_to(2),
+                    ) 
                 )
-            )
+                spack_env.set( "TENSORFLOW_INC",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib,
+                        "python%s/site-packages/tensorflow/include"
+                        % self.spec["python"].version.up_to(2),
+                    )
+                )
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)

@@ -49,7 +49,13 @@ class Protoduneana(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
-    patch("https://github.com/DUNE/protoduneana/commit/87d57aee0ff099783aa560b35e769256cac5d652.patch",
+    variant(
+        "tensorflow",
+        default=True,
+        description="Include py-tensorflow",
+    )
+
+    patch("https://github.com/DUNE/protoduneana/commit/87d57aee0ff099783aa560b35e769256cac5d652.patch?full_index=1",
           sha256="408f340af534805c67e693480f677c8e934024244fcf1c661bd534daebd6a605", when="@10.20.03d01")
     patch('v09_81_00d00.patch', when='@09.81.00d00')
     patch('artdaq-core-v4.0.patch', when='^artdaq-core@v4:')
@@ -64,6 +70,8 @@ class Protoduneana(CMakePackage):
     depends_on("cxx", type="build")
     depends_on("artdaq-core")
     depends_on("larrecodnn")
+    depends_on("larrecodnn~tensorflow", when="~tensorflow")
+    depends_on("larrecodnn+tensorflow", when="+tensorflow")
     depends_on("torch-scatter")
     depends_on("grpc")
     depends_on("hep-hpc")
@@ -72,7 +80,7 @@ class Protoduneana(CMakePackage):
     depends_on("dunereco")
     depends_on("dunesim")
     depends_on("python")
-    depends_on("py-tensorflow")
+    depends_on("py-tensorflow", when="+tensorflow")
     depends_on("geant4reweight")
     depends_on("nusystematics")
     depends_on("systematicstools")
@@ -118,36 +126,37 @@ class Protoduneana(CMakePackage):
                 )
             )
         spack_env.set("PROTOBUF_DIR", self.spec["protobuf"].prefix.lib)
-        if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
-            spack_env.set( "TENSORFLOW_INC",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib64,
-                    "python%s/site-packages/tensorflow/include"
-                    % self.spec["python"].version.up_to(2),
+        with when("+tensorflow"):
+            if os.path.exists(self.spec["py-tensorflow"].prefix.lib64):
+                spack_env.set( "TENSORFLOW_INC",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib64,
+                        "python%s/site-packages/tensorflow/include"
+                        % self.spec["python"].version.up_to(2),
+                    )
                 )
-            )
-            spack_env.set("TENSORFLOW_DIR",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib64,
-                    "python%s/site-packages/tensorflow"
-                    % self.spec["python"].version.up_to(2),
+                spack_env.set("TENSORFLOW_DIR",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib64,
+                        "python%s/site-packages/tensorflow"
+                        % self.spec["python"].version.up_to(2),
+                    )
                 )
-            )
-        else:
-            spack_env.set("TENSORFLOW_DIR",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib,
-                    "python%s/site-packages/tensorflow"
-                    % self.spec["python"].version.up_to(2),
+            else:
+                spack_env.set("TENSORFLOW_DIR",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib,
+                        "python%s/site-packages/tensorflow"
+                        % self.spec["python"].version.up_to(2),
+                    )
                 )
-            )
-            spack_env.set( "TENSORFLOW_INC",
-                join_path(
-                    self.spec["py-tensorflow"].prefix.lib,
-                    "python%s/site-packages/tensorflow/include"
-                    % self.spec["python"].version.up_to(2),
+                spack_env.set( "TENSORFLOW_INC",
+                    join_path(
+                        self.spec["py-tensorflow"].prefix.lib,
+                        "python%s/site-packages/tensorflow/include"
+                        % self.spec["python"].version.up_to(2),
+                    )
                 )
-            )
 
     def setup_run_environment(self, run_env):
         run_env.prepend_path("CET_PLUGIN_PATH", self.prefix.lib)
