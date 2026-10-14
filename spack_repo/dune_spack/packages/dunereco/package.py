@@ -49,6 +49,12 @@ class Dunereco(CMakePackage):
         description="Use the specified C++ standard when building.",
     )
 
+    variant(
+        "tensorflow",
+        default=True,
+        description="Include py-tensorflow",
+    )
+
     patch("supera.patch", when="@10.20:")
     patch('v09_81_00d00.patch', when='@09.81.00d00')
 
@@ -56,11 +62,12 @@ class Dunereco(CMakePackage):
     depends_on("cxx", type="build")
     depends_on("hep-hpc")
     #depends_on("python")
-    depends_on("py-tensorflow")
+    depends_on("py-tensorflow", when="+tensorflow")
     depends_on("py-torch")
     depends_on("triton")
     depends_on("protobuf")
-    depends_on("larrecodnn")
+    depends_on("larrecodnn+tensorflow", when="+tensorflow")
+    depends_on("larrecodnn~tensorflow", when="~tensorflow")
     depends_on("larcv2")
     depends_on("dunecore")
     depends_on("duneprototypes")
@@ -73,14 +80,15 @@ class Dunereco(CMakePackage):
     depends_on("cmake", type="build")
 
     def patch(self):
-        filter_file('#include "tensorflow/cc/saved_model/tag_constants.h"',
-                    '#include "tensorflow/cc/saved_model/constants.h"\n#include "tensorflow/cc/saved_model/loader.h"',
-                    "dunereco/CVN/tf/tf_bundle.cc",
-                    )
-        filter_file("{tensorflow::kSavedModelTagServe},",
-                    "{},",
-                    "dunereco/CVN/tf/tf_bundle.cc",
-                    )
+        with when("+tensorflow"):
+            filter_file('#include "tensorflow/cc/saved_model/tag_constants.h"',
+                        '#include "tensorflow/cc/saved_model/constants.h"\n#include "tensorflow/cc/saved_model/loader.h"',
+                        "dunereco/CVN/tf/tf_bundle.cc",
+                        )
+            filter_file("{tensorflow::kSavedModelTagServe},",
+                        "{},",
+                        "dunereco/CVN/tf/tf_bundle.cc",
+                       )
         filter_file('find_package\( Eigen3 REQUIRED \)',
                 'find_package(protobuf REQUIRED)\nfind_package( Eigen3 REQUIRED )',
                 "CMakeLists.txt"
