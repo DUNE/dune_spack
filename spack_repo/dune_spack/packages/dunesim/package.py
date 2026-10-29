@@ -13,6 +13,14 @@ class Dunesim(CMakePackage):
     git = "https://github.com/DUNE/dunesim"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.26.00d05", sha256="a351f40e46d755e7bd27176a916a6353e870dcc0b5d24ae87c42c45058542402")
+    version("10.26.00d04", sha256="a70d5f74dd9c696c2ec4e1cc4a448d1ea1a355a96079e26734330ddee6053de8")
+    version("10.26.00d03", sha256="9bfa7b0d3f2ef831ed3d388696c92f43c2c0df70e3c6ddf4c7b96d26ec49df70")
+    version("10.26.00d02", sha256="22bd9a16cc333439d694ae5c112fb9e631f4939429b4b0b3f5a5cdd669688126")
+    version("10.26.00d01", sha256="adf2c38f2eb360f8aa5cf25fcd6e2a98d6f01db3c23c3e756317087348e321c3")
+    version("10.26.00d00", sha256="aa1c44dabda92f7f7fd7ed2466ca7b4f04ea8694b3631372532e42f3c1d51e62")
+    version("10.25.00d00", sha256="f36d7cb6d79be50a4b8b44cb8133cd751e364a02c401042d83f23a6e64dc0015")
+    version("10.24.00d00", sha256="5c51f5d45b063eb5877b60d7f94117b7b34f3e3aa9fcbf45edfa0af549ee3b35")
     version("10.23.00d01", sha256="5627ce624e887482a491ec4fd7ede2cd27790b1952d3ae9f6d18dd244ce3c228")
     version("10.23.00d00", sha256="bcb71046543f7ccc867d8a343d6b8aaee22ceb2beebc231d64e71ccee1b31ed4")
     version("10.22.00d01", sha256="ac5c1e51d0e462edb22c17014cb9f8baaa406e7c685a66f8e8e58fc7e9a3501d")
