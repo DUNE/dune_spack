@@ -13,10 +13,14 @@ class Duneanaobj(CMakePackage):
     git = "https://github.com/DUNE/duneanaobj"
     url = f"{git}/archive/v03_03_00.tar.gz"
 
+    version("04.02.01", sha256="4942609b33365866142fc5155f5bdaead12c27c7aa541f70c1a1675f48adb351")
+    version("04.02.00", sha256="cc2cbccbf204d9fc1292585efd97341f61bb2b32b6c89bedad1b6d2960289ccb")
+    version("04.01.01", sha256="3767ab3398f6868038e79b91ea5cb1b6ca85406c174a0d1009d1f7117bbfef81")
     version("04.01.00", sha256="7e1eb6ac797b98718fbf33acad1cf29904939d83dd1d1e6068925e08f8061a00")
     version("04.00.00", sha256="4425c906ba117e3823c479feb2c5ba168707c157df063f7c5aded2f77e16d595")
     version("03.16.00", sha256="b8f52ddbd86b7bd054f3291eb06f1810584c3e27e0ef130414ef6e91023eeb15")
     version("03.15.00", sha256="d05a9ce506597d954bee6e62138336d8cfcbfc249e0ecb6874638aaeb1895d4c")
+    version("03.13.00", sha256="0c11c810701c157902d6a928c314563ae0fdeaa2d4bb708436cf2a36ef08980b")
     version("03.12.00", sha256="32a0134bdfd4e7c41ae04bf8d4ea137175cf49fbe9566379f0237f033ca2228f")
     version("03.11.00", sha256="b386cb3b448b38d880bb64457cc15434fd5d872168a0287712edf23544e70550")
     version("03.10.00", sha256="35f025b77b3f5c6cc4666d1bbd04b2ff8f837a51670bbe5c0d80a7e3145164d8")

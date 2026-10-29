@@ -13,6 +13,14 @@ class Duneutil(CMakePackage):
     git = "https://github.com/DUNE/duneutil"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.26.00d05", sha256="7e6507b4ecab7af4a180d2d52ca386894c75ecc47340a829213225b9f47941ca")
+    version("10.26.00d04", sha256="fb083e20a18f89d8138a26d3b63a9f15ba7c2cce1e682eab389d1197395ee447")
+    version("10.26.00d03", sha256="e14bde93dcbc2b0685707cb6ce091c93c53dca70cd132f425f74b64ac44f7ccf")
+    version("10.26.00d02", sha256="ea84fc1a275cb04a7fcde5d4dbe6a8be24c7a68fbc2a6d485fecd40cee6cea0d")
+    version("10.26.00d01", sha256="ae63968ac97f974f65ce7a0b1e838ad6e739d599f8fe6e797b759d893660daf0")
+    version("10.26.00d00", sha256="a824f27547a6bba2e03541521edd11fd3e344359453e26dea9a91ab0beef444a")
+    version("10.25.00d00", sha256="ce752a0fa8d4b93dc5f7e4563f9210d713577d2a60315abf1e2bc3e3043e507c")
+    version("10.24.00d00", sha256="285b1d5a2ce6268697b51a53068ab36d526854263e60a595db0f880c8ad7cd5f")
     version("10.23.00d01", sha256="0551388058e3bd243603d3e858192ebad3572b0c6bebb7d3306329dde956bbb3")
     version("10.23.00d00", sha256="b977c10081c29c6244a082801ff77962aa2dc62c3dd426b2dbd7bc36bec526ea")
     version("10.22.00d01", sha256="c523b3ca1ced33dfa1989c4a385e9779d2b5db4047b7fe61eb4aaa3582ac143a")

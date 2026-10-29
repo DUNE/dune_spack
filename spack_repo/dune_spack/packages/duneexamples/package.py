@@ -13,6 +13,14 @@ class Duneexamples(CMakePackage):
     git = "https://github.com/DUNE/duneexamples"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.26.00d05", sha256="0e03d737088fdfc6091315621e4ee3a88d5f5923c0190146af3bb57f0d536319")
+    version("10.26.00d04", sha256="ddb4c9dedd3da2c6476fa5c7101b755484424992b6e4fca291e953c1ebb57e12")
+    version("10.26.00d03", sha256="3216bf5bdd5c4eba15a883fef2b5cdae7648a2598337e02db459a0930c80c003")
+    version("10.26.00d02", sha256="cec62b57ebc6938a9f8969d6929d3ff214c022c423291e57804653b4dbdb7b88")
+    version("10.26.00d01", sha256="08362aa2c289e1d0abb4cad363e30139f64776124a7db237502f90d72a5034cb")
+    version("10.26.00d00", sha256="6816754e14cf378ff07e896d1d2bc445d342af933d6c6d2e82756c14b0ad45b6")
+    version("10.25.00d00", sha256="8626db1508d60510385c51461a5414c8a18c82aefb886cd5fea5b264533d72fb")
+    version("10.24.00d00", sha256="e296be62f294a3e7fc7cfb6ede4e0f736c316acb7c15f47ebd74e32a92c265e4")
     version("10.23.00d01", sha256="0fd9b198b81d944d2ca8c53ddffcfc32bab0cdde5bc962a87afd3a43431f1afb")
     version("10.23.00d00", sha256="61e33ec53a52939d90c410e92d3af9ec825347a1a8f708d5165c02cd7282056d")
     version("10.22.00d01", sha256="ba1f0d3ebc31aad039892e0ebc9a171216edc56fedd6b56c937bc4f7138e747d")

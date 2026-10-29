@@ -13,6 +13,14 @@ class Dunedataprep(CMakePackage):
     git = "https://github.com/DUNE/dunedataprep"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.26.00d05", sha256="a5a1f85b211c826f72bcb0c00fc575ac94613209b7fec9fc04ef9aa0d859c712")
+    version("10.26.00d04", sha256="e203b1938de01832b2e26dfbbded01710052d7cae602c5304c155ebedf3045b6")
+    version("10.26.00d03", sha256="c0dba5a6a992a7b9830b09adb12aa4f786b8521b4b59da5ebc73f1931fa1116c")
+    version("10.26.00d02", sha256="31d28d81e7a185a93f6074e8a62ce97069f0b099e3ad4dfd8bc2246dc4d453eb")
+    version("10.26.00d01", sha256="359d807fd69a2561f15019ea912e9e5c1f1a4a22efbb6982c0f03f384d61ec46")
+    version("10.26.00d00", sha256="240377d6d2dfcfef2ec1945d583c853f90a9270eda77cfddd7790aa12e2cc8a9")
+    version("10.25.00d00", sha256="f8a73105e0ac73b9b0aa78117b668e1e0d76cbea59258a2a16aac00976db4bff")
+    version("10.24.00d00", sha256="4f8bd9bcdb71efb89d24919d7734a9aa3020228625dcab1094167e7fb990c4bc")
     version("10.23.00d01", sha256="45600fa34fc6c729673abc5a011dd21d3bcc46c478b6ed61d6b1ff3f0a59ac4e")
     version("10.23.00d00", sha256="9d7e46f335c2768c59e4841d30abb1fddaeacda7d99519c85f22478b2c2c06e9")
     version("10.22.00d01", sha256="a84408d41574a903abafea96b8fd3739eb8938cadd6f637950b9a00574830ecd")
