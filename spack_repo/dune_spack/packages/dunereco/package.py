@@ -18,7 +18,6 @@ class Dunereco(CMakePackage):
     version("10.26.00d03", sha256="81abe7b3c991d779dc53a8403c948a442393b16731c106e16deb8b73e22755ea")
     version("10.26.00d02", sha256="2d54b01f674eb953db170f73103c3ab76b0f9f234bf5518cfd37824251769c18")
     version("10.26.00d01", sha256="43e86acb402d04b61e0a5bbc8421cf526df615ec0fa186631eee6f052a3b51bd")
-    version("10.26.00d00", sha256="07f9ceed06bdc8cea576395f8026ade5801ff0143f2cf4e8524540a7aee7792f")
     version("10.25.00d00", sha256="e729261c9fb860ee3806d51d08219710ceda5cf2dec9bdc6bb2bcd3dd88908d5")
     version("10.24.00d00", sha256="74f2c5fd8a00b0f9e8c90d000d052859426a9eb671f50ffab7d3a247ecbf95fe")
     version("10.23.00d01", sha256="48270bf3d0f0896b73f63e2465cbca56c56235b3333454638ad261b78dfd7559")
@@ -63,7 +62,8 @@ class Dunereco(CMakePackage):
         description="Include py-tensorflow",
     )
 
-    patch("supera.patch", when="@10.20:")
+    patch("supera-10.26.00d01.patch", when="@10.26:")
+    patch("supera.patch", when="@10.20:10.25")
     patch('v09_81_00d00.patch', when='@09.81.00d00')
 
     depends_on("c", type="build")
