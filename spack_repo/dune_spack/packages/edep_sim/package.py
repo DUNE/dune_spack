@@ -10,7 +10,7 @@ class EdepSim(CMakePackage):
 
     license("MIT")
 
-    version("4.0.0", tag="4.0.0")
+    version("abooth-g4", branch="feature/abooth-g4_11p2plus")
     version("master", branch="master")
 
     depends_on("c", type="build")
