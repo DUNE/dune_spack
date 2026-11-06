@@ -1,47 +1,46 @@
-# This package.py written by Liam O'Sullivan <liam.osullivan@uni-mainz.de>
-# For reasons™, explicitly including root and geant4 as dependencies
-# causes the build to fail (missing blas or whatevs).
-# If you spack load root and geant4 it builds fine though.
-
 from spack_repo.builtin.build_systems.cmake import CMakePackage
 from spack.package import *
 
+
 class EdepSim(CMakePackage):
-    """edep-sim -- an energy deposit simulation based on Geant4"""
+    """edep-sim -- an energy deposit simulation based on Geant4 (DUNE fork)"""
+
+    homepage = "https://github.com/DUNE/edep-sim"
+    git = "https://github.com/DUNE/edep-sim.git"
 
     license("MIT")
-    homepage = "https://github.com/ClarkMcGrew/edep-sim"
-    git = "https://github.com/ClarkMcGrew/edep-sim"
-    url = "https://github.com/ClarkMcGrew/edep-sim/archive/refs/tags/3.2.0.tar.gz"
 
-    executables = ["^edep-sim$", "^edep-disp$"]
-
-    maintainers("LiamOS") # Maintainer on FNAL SPack, maintainer of edep-sim is Clark McGrew
-
+    version("4.0.0", tag="4.0.0")
     version("master", branch="master")
-    version("develop", branch="master")
-    # Actual releases:
-    version("3.2.0", sha256="119a5b274601cf721d4f954dee8191e089f157b7b9feb97b10e6a1de399f7771")
-    version("3.1.0", sha256="7ac82d4ef30259b98b82b7d6bca4e556b5c1f65a4e7b9f7bd24df2304ebdd97e")
-    version("3.0.0", sha256="b91343f986ecb66505de813c6221a74c42d3635c4bb9bfe947cf6a1ac397bc15")
-    # We don't really need these ones though, surely...
-    #version("2.0.1", sha256="")
-    #version("2.0.0", sha256="")
-    #version("1.0.0", sha256="")
-    #version("0.1.0", sha256="")
-    #version("0.0.2", sha256="")
-    #version("0.0.1", sha256="")
+
+    variant(
+        "particlebomb",
+        default=False,
+        description="Enable the ParticleBomb (MPV/MPR) generator from DLPGenerator",
+    )
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")
-    depends_on("cmake", type="build")
-    depends_on("nlohmann-json")
-    #depends_on("root") # TODO: In theory it does depend on ROOT and Geant4, but fails when they're enabled here
-    #depends_on("geant4")
+    depends_on("cmake@3.0:", type="build")
 
-    def setup_run_environment(self, env): 
+    # Geant4 as in the sim2x2 container; ROOT as in the dunesw upstream stack
+    depends_on("root@6.28.12")
+    depends_on("geant4@10.7.4")
+    depends_on("nlohmann-json")
+
+    depends_on("yaml-cpp@0.8.0 +shared", when="+particlebomb")
+    depends_on("dlpgenerator", when="+particlebomb")
+
+    def cmake_args(self):
+        return [self.define_from_variant("EDEPSIM_USE_PARTICLEBOMB", "particlebomb")]
+
+    def setup_build_environment(self, env):
+        if self.spec.satisfies("+particlebomb"):
+            dlp = self.spec["dlpgenerator"].prefix
+            env.set("DLPGENERATOR_INCDIR", dlp.include)
+            env.set("DLPGENERATOR_LIBDIR", dlp.lib)
+
+    def setup_run_environment(self, env):
         env.set("EDEP_ROOT", self.prefix)
         env.set("EDEPSIM_LIB", self.prefix.lib)
         env.set("EDEPSIM_INC", self.prefix.include)
-
-
