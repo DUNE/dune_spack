@@ -37,3 +37,18 @@ class PyNdlarFlow(PythonPackage):
         # Imported by src/ but missing from pyproject.toml
         depends_on("py-pyyaml")
         depends_on("py-tqdm")
+        
+        # setup.py only installs src/. The workflow YAMLs include each other and the
+        # data files with paths relative to the repository root (for example
+        # "!include yamls/ndlar_flow/resources/RunDataMC.yaml"), so install yamls/
+        # and data/ side by side and run workflows from that directory. scripts/
+        # holds standalone tools. The repository also has test/, docs/ and
+        # event_display/, which are not installed.
+        @run_after("install")
+        def install_workflow_files(self):
+            share = join_path(self.prefix.share, "ndlar_flow")
+            for name in ("yamls", "data", "scripts"):
+                install_tree(name, join_path(share, name))
+
+        def setup_run_environment(self, env):
+            env.set("NDLAR_FLOW_DIR", join_path(self.prefix.share, "ndlar_flow"))
