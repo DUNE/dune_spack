@@ -13,6 +13,8 @@ class Dunereco(CMakePackage):
     git = "https://github.com/DUNE/dunereco"
     url = f"{git}/archive/v09_81_00d00.tar.gz"
 
+    version("10.31.00d00", sha256="869312046efac99f3e38f5e26280373a4dae444c7dbedf3a59210594cfc71b73")
+    version("10.30.00d00", sha256="462940db605fd8eb550d953533b891ae6414c7b096603a34264e28d3ba5fd6fa")
     version("10.26.00d05", sha256="b01c665c0032e2ea3c06d714607d4e7b235ceed11949bec04bd8a29a6f899e85")
     version("10.26.00d04", sha256="f61b0d9547fbc1f5de9a3e9233357117ac969bd2501c20e68030ef17d5a4a055")
     version("10.26.00d03", sha256="81abe7b3c991d779dc53a8403c948a442393b16731c106e16deb8b73e22755ea")
